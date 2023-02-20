@@ -1,5 +1,6 @@
+import { Content } from "./content";
 function App() {
-  return <h1>currency_exchange</h1>;
+  return <Content />;
 }
 
 export default App;
