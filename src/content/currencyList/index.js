@@ -8,36 +8,61 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { Typography } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 
 export const CurrencyList = () => {
   const [currencyList, getCurrencyList] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://api.exchangerate.host/latest")
+    fetch("https://api.exchangerate.host/latest?base=USD")
       .then((response) => response.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        console.log(data);
+        getCurrencyList(Object.entries(data.rates));
+        setIsLoading(false);
+        console.log(currencyList);
+      });
   }, []);
 
+  if (isLoading) {
+    return <CircularProgress />;
+  }
+
+  if (!currencyList) {
+    return (
+      <Typography variant="h6">
+        There was an error downloading data. Please try later.
+      </Typography>
+    );
+  }
+
   return (
-    <TableContainer sx={{ minWidth: 550, maxWidth: 580 }} component={Paper}>
+    <TableContainer sx={{ minWidth: 300, maxWidth: 320 }} component={Paper}>
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell colSpan={3}>Currency</TableCell>
-            <TableCell align="right">Buy</TableCell>
-            <TableCell align="right">Sale</TableCell>
+            <TableCell align="right">Rate</TableCell>
+            <TableCell align="left">Base currency: {"USD"}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell align="left">Currency</TableCell>
+            <TableCell align="right">Rate</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-            <TableCell component="th" scope="row">
-              flag of company
-            </TableCell>
-            <TableCell align="right">currency</TableCell>
-            <TableCell align="right">currency full name</TableCell>
-            <TableCell align="right">2.22</TableCell>
-            <TableCell align="right">2.24</TableCell>
-          </TableRow>
+          {currencyList.map((currency) => {
+            return (
+              <TableRow
+                key={currency[0]}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell align="left">{currency[0]}</TableCell>
+                <TableCell align="right">{currency[1]}</TableCell>
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
     </TableContainer>
