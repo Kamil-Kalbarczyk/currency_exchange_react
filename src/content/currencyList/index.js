@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-
-import * as React from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -13,7 +11,7 @@ import { Typography } from "@mui/material";
 import { CircularProgress } from "@mui/material";
 import TextField from "@mui/material/TextField";
 
-const BasedCurrency = styled.span`
+const BasedCurrencyName = styled.span`
   font-weight: bold;
 `;
 
@@ -26,11 +24,9 @@ export const CurrencyList = () => {
     fetch("https://api.exchangerate.host/latest?base=USD")
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data);
         setCurrencyList(Object.entries(data.rates));
         setCurrencyFilter(Object.entries(data.rates));
         setIsLoading(false);
-        // console.log(currencyList);
       });
   }, []);
 
@@ -46,15 +42,6 @@ export const CurrencyList = () => {
     );
   }
 
-  if (currencyList) {
-    const filterList = currencyList.filter((item) => {
-      const [currency, rate] = item;
-      return currency.includes("SD");
-    });
-
-    // console.log(filterList);
-  }
-
   const handleCurrencyFilter = (e) => {
     setCurrencyFilter(currencyList);
     const filterValue = e.target.value.toUpperCase();
@@ -65,12 +52,10 @@ export const CurrencyList = () => {
     });
 
     setCurrencyFilter(filterList);
-
-    // setCurrencyList(filterList);
   };
 
   return (
-    <TableContainer sx={{ minWidth: 300, maxWidth: 320 }} component={Paper}>
+    <TableContainer sx={{ minWidth: 300, maxWidth: 420 }} component={Paper}>
       <Table>
         <TableHead>
           <TableRow>
@@ -83,12 +68,16 @@ export const CurrencyList = () => {
               />
             </TableCell>
             <TableCell align="left">
-              Base currency: <BasedCurrency>{"USD"}</BasedCurrency>
+              Base currency: <BasedCurrencyName>{"USD"}</BasedCurrencyName>
             </TableCell>
           </TableRow>
           <TableRow>
-            <TableCell align="left">Currency</TableCell>
-            <TableCell align="right">Rate</TableCell>
+            <TableCell align="left" sx={{ fontWeight: "bold" }}>
+              Currency
+            </TableCell>
+            <TableCell align="right" sx={{ fontWeight: "bold" }}>
+              Rate
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -99,7 +88,9 @@ export const CurrencyList = () => {
                 key={currency}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell align="left">{currency}</TableCell>
+                <TableCell align="left" sx={{ fontWeight: "bold" }}>
+                  {currency}
+                </TableCell>
                 <TableCell align="right">{rate}</TableCell>
               </TableRow>
             );
