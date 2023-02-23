@@ -21,6 +21,10 @@ export const CurrencyComparison = () => {
     console.log("second currency", e);
   };
 
+  const handleChangeValue = (e) => {
+    console.log(e.target.name);
+  };
+
   return (
     <Box sx={{ display: "flex", flexWrap: "wrap", flexDirection: "column" }}>
       <div>
@@ -39,7 +43,9 @@ export const CurrencyComparison = () => {
                 </Button>
               </InputAdornment>
             }
+            name="firstCurrency"
             value={firstCurrency.value}
+            onChange={handleChangeValue}
           />
         </FormControl>
       </div>
@@ -59,7 +65,9 @@ export const CurrencyComparison = () => {
                 </Button>
               </InputAdornment>
             }
+            name="secondCurrency"
             value={secondCurrency.value}
+            onChange={handleChangeValue}
           />
         </FormControl>
       </div>
