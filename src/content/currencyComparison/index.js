@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { CurrencyContext } from "../currencyContext";
-
+import styled, { keyframes } from "styled-components";
 import Box from "@mui/material/Box";
 import Input from "@mui/material/Input";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -11,7 +11,7 @@ export const CurrencyComparison = () => {
   const { currencyPair, setCurrencyPair, selectCurrency, setSelectCurrency } =
     useContext(CurrencyContext);
 
-  const [currencyValues, setcurrencyValues] = useState({
+  const [currencyValues, setCurrencyValues] = useState({
     baseCurrency: 100,
     secondCurrency: 100,
   });
@@ -35,7 +35,15 @@ export const CurrencyComparison = () => {
   };
 
   return (
-    <Box sx={{ display: "flex", flexWrap: "wrap", flexDirection: "column" }}>
+    <Box
+      sx={{
+        display: "flex",
+        flexWrap: "wrap",
+        flexDirection: "column",
+        transition: "0.3s",
+        // transform: selectCurrency ? "scale(0)" : "scale(1)",
+      }}
+    >
       <div>
         <FormControl sx={{ m: 1, width: "25ch" }} variant="standard">
           {/* <InputLabel htmlFor="firstComparisonCurrency">{firstCurrency.name}</InputLabel> */}
