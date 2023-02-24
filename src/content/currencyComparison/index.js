@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { CurrencyContext } from "../currencyContext";
 import Box from "@mui/material/Box";
 import Input from "@mui/material/Input";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -6,6 +7,8 @@ import FormControl from "@mui/material/FormControl";
 import Button from "@mui/material/Button";
 
 export const CurrencyComparison = () => {
+  // console.log(useContext(CurrencyContext).currencyPair);
+
   const [currencyPair, setcurrencyPair] = useState({
     firstCurrency: { name: "USD", value: 100 },
     secondCurrency: { name: "EUR", value: 100 },

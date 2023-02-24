@@ -1,3 +1,4 @@
+import { CurrencyContextProvider } from "./currencyContext";
 import { CurrencyComparison } from "./currencyComparison";
 import { CurrencyList } from "./currencyList";
 import styled from "styled-components";
@@ -13,8 +14,10 @@ const Container = styled.div`
 export const Content = () => {
   return (
     <Container>
-      <CurrencyComparison />
-      <CurrencyList />
+      <CurrencyContextProvider>
+        <CurrencyComparison />
+        <CurrencyList />
+      </CurrencyContextProvider>
     </Container>
   );
 };
