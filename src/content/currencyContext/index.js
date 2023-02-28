@@ -2,16 +2,11 @@ import { createContext, useState } from "react";
 
 export const CurrencyContext = createContext({});
 
-// export const SelectCurrency = createContext({
-//     currency: 'USD',
-//     base: true
-// })
-
 export const CurrencyContextProvider = ({ children }) => {
   const [currencyPair, setCurrencyPair] = useState({
-    baseCurrency: "USD",
-    secondCurrency: "EUR",
-    rate: 100,
+    baseCurrency: { currency: "USD", value: 100 },
+    secondCurrency: { currency: "EUR", value: 100 },
+    rate: 1,
   });
   const [selectCurrency, setSelectCurrency] = useState(null);
 

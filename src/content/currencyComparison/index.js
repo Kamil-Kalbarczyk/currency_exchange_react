@@ -11,12 +11,7 @@ export const CurrencyComparison = () => {
   const { currencyPair, setCurrencyPair, selectCurrency, setSelectCurrency } =
     useContext(CurrencyContext);
 
-  const [currencyValues, setCurrencyValues] = useState({
-    baseCurrency: 100,
-    secondCurrency: 100,
-  });
-
-  const { baseCurrency, secondCurrency } = currencyPair;
+  const { baseCurrency, secondCurrency, rate } = currencyPair;
 
   const handleClickFirstComparisonCurrency = (e) => {
     console.log("first currency", e);
@@ -56,12 +51,12 @@ export const CurrencyComparison = () => {
                   variant="text"
                   onClick={handleClickFirstComparisonCurrency}
                 >
-                  {baseCurrency}
+                  {baseCurrency.currency}
                 </Button>
               </InputAdornment>
             }
             name="firstCurrency"
-            value={currencyValues.baseCurrency}
+            value={baseCurrency.value}
             onChange={handleChangeValue}
           />
         </FormControl>
@@ -78,12 +73,12 @@ export const CurrencyComparison = () => {
                   variant="text"
                   onClick={handleClickSecondComparisonCurrency}
                 >
-                  {secondCurrency}
+                  {secondCurrency.currency}
                 </Button>
               </InputAdornment>
             }
             name="secondCurrency"
-            value={currencyValues.secondCurrency}
+            value={secondCurrency.value}
             onChange={handleChangeValue}
           />
         </FormControl>

@@ -17,17 +17,20 @@ const BasedCurrencyName = styled.span`
 `;
 
 export const CurrencyList = () => {
-  // const [currencyList, setCurrencyList] = useState(null);
+  const {
+    currencyFullList,
+    setCurrencyFullList,
+    currencyPair: { baseCurrency, secondCurrency, rate },
+    setCurrencyPair,
+  } = useContext(CurrencyContext);
+
   const [isLoading, setIsLoading] = useState(true);
   const [currencyFilter, setCurrencyFilter] = useState(null);
 
-  const { currencyFullList, setCurrencyFullList } = useContext(CurrencyContext);
-
   useEffect(() => {
-    fetch("https://api.exchangerate.host/latest?base=USD")
+    fetch(`https://api.exchangerate.host/latest?base=${baseCurrency.currency}`)
       .then((response) => response.json())
       .then((data) => {
-        // setCurrencyList(Object.entries(data.rates));
         setCurrencyFullList(Object.entries(data.rates));
         setCurrencyFilter(Object.entries(data.rates));
         setIsLoading(false);
@@ -72,7 +75,8 @@ export const CurrencyList = () => {
               />
             </TableCell>
             <TableCell align="left">
-              Base currency: <BasedCurrencyName>{"USD"}</BasedCurrencyName>
+              Base currency:{" "}
+              <BasedCurrencyName>{baseCurrency.currency}</BasedCurrencyName>
             </TableCell>
           </TableRow>
           <TableRow>
