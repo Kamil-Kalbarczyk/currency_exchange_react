@@ -15,6 +15,8 @@ export const CurrencyContextProvider = ({ children }) => {
   });
   const [selectCurrency, setSelectCurrency] = useState(null);
 
+  const [currencyFullList, setCurrencyFullList] = useState(null);
+
   return (
     <CurrencyContext.Provider
       value={{
@@ -22,6 +24,8 @@ export const CurrencyContextProvider = ({ children }) => {
         setCurrencyPair,
         selectCurrency,
         setSelectCurrency,
+        currencyFullList,
+        setCurrencyFullList,
       }}
     >
       {children}

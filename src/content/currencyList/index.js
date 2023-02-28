@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { CurrencyContext } from "../currencyContext";
 import styled from "styled-components";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -16,15 +17,18 @@ const BasedCurrencyName = styled.span`
 `;
 
 export const CurrencyList = () => {
-  const [currencyList, setCurrencyList] = useState(null);
+  // const [currencyList, setCurrencyList] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [currencyFilter, setCurrencyFilter] = useState(null);
+
+  const { currencyFullList, setCurrencyFullList } = useContext(CurrencyContext);
 
   useEffect(() => {
     fetch("https://api.exchangerate.host/latest?base=USD")
       .then((response) => response.json())
       .then((data) => {
-        setCurrencyList(Object.entries(data.rates));
+        // setCurrencyList(Object.entries(data.rates));
+        setCurrencyFullList(Object.entries(data.rates));
         setCurrencyFilter(Object.entries(data.rates));
         setIsLoading(false);
       });
@@ -34,7 +38,7 @@ export const CurrencyList = () => {
     return <CircularProgress />;
   }
 
-  if (!currencyList) {
+  if (!currencyFullList) {
     return (
       <Typography variant="h6">
         There was an error downloading data. Please try later.
@@ -43,10 +47,10 @@ export const CurrencyList = () => {
   }
 
   const handleCurrencyFilter = (e) => {
-    setCurrencyFilter(currencyList);
+    setCurrencyFilter(currencyFullList);
     const filterValue = e.target.value.toUpperCase();
 
-    const filterList = currencyList.filter((item) => {
+    const filterList = currencyFullList.filter((item) => {
       const [currency, rate] = item;
       return currency.includes(filterValue);
     });
