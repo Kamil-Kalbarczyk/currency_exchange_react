@@ -29,7 +29,7 @@ export const CurrencyComparison = () => {
         },
         rate: rateOfSecondCurrency,
       });
-      console.log(currencyPair);
+      // console.log(currencyPair);
     }
   }, [currencyFullList, baseCurrency.currency, secondCurrency.currency]);
 
@@ -42,7 +42,22 @@ export const CurrencyComparison = () => {
   };
 
   const handleChangeValue = (e) => {
-    console.log(e.target.name);
+    if (e.target.name === "firstCurrency") {
+      const firstCurrencyValue = e.target.value;
+      const secondCurrencyValue =
+        Math.round(firstCurrencyValue * rate * 100) / 100;
+      setCurrencyPair({
+        ...currencyPair,
+        baseCurrency: {
+          ...baseCurrency,
+          value: firstCurrencyValue,
+        },
+        secondCurrency: {
+          ...secondCurrency,
+          value: secondCurrencyValue,
+        },
+      });
+    }
   };
 
   return (
