@@ -8,7 +8,6 @@ export const CurrencyContextProvider = ({ children }) => {
     secondCurrency: { currency: "EUR", value: 100 },
     rate: 1,
   });
-  const [selectCurrency, setSelectCurrency] = useState(null);
 
   const [currencyFullList, setCurrencyFullList] = useState(null);
 
@@ -17,8 +16,6 @@ export const CurrencyContextProvider = ({ children }) => {
       value={{
         currencyPair,
         setCurrencyPair,
-        selectCurrency,
-        setSelectCurrency,
         currencyFullList,
         setCurrencyFullList,
       }}

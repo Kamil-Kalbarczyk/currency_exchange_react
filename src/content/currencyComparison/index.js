@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { CurrencyContext } from "../currencyContext";
 import styled, { keyframes } from "styled-components";
 import Box from "@mui/material/Box";
@@ -8,21 +8,37 @@ import FormControl from "@mui/material/FormControl";
 import Button from "@mui/material/Button";
 
 export const CurrencyComparison = () => {
-  const { currencyPair, setCurrencyPair, selectCurrency, setSelectCurrency } =
+  const { currencyPair, setCurrencyPair, currencyFullList } =
     useContext(CurrencyContext);
 
   const { baseCurrency, secondCurrency, rate } = currencyPair;
 
+  // set rate currency
+  useEffect(() => {
+    if (baseCurrency && secondCurrency && currencyFullList) {
+      const rateOfSecondCurrency = currencyFullList.find(([currency, rate]) => {
+        return currency === secondCurrency.currency;
+      })[1];
+      const secondCurrencyValue =
+        Math.round(baseCurrency.value * rateOfSecondCurrency * 100) / 100;
+      setCurrencyPair({
+        ...currencyPair,
+        secondCurrency: {
+          ...secondCurrency,
+          value: secondCurrencyValue,
+        },
+        rate: rateOfSecondCurrency,
+      });
+      console.log(currencyPair);
+    }
+  }, [currencyFullList, baseCurrency.currency, secondCurrency.currency]);
+
   const handleClickFirstComparisonCurrency = (e) => {
     console.log("first currency", e);
-    setSelectCurrency({ base: true });
-    console.log(selectCurrency);
   };
 
   const handleClickSecondComparisonCurrency = (e) => {
     console.log("second currency", e);
-    setSelectCurrency({ base: false });
-    console.log(selectCurrency);
   };
 
   const handleChangeValue = (e) => {
@@ -36,7 +52,6 @@ export const CurrencyComparison = () => {
         flexWrap: "wrap",
         flexDirection: "column",
         transition: "0.3s",
-        // transform: selectCurrency ? "scale(0)" : "scale(1)",
       }}
     >
       <div>
