@@ -42,22 +42,27 @@ export const CurrencyComparison = () => {
   };
 
   const handleChangeValue = (e) => {
+    let firstCurrencyValue = null;
+    let secondCurrencyValue = null;
     if (e.target.name === "firstCurrency") {
-      const firstCurrencyValue = e.target.value;
-      const secondCurrencyValue =
-        Math.round(firstCurrencyValue * rate * 100) / 100;
-      setCurrencyPair({
-        ...currencyPair,
-        baseCurrency: {
-          ...baseCurrency,
-          value: firstCurrencyValue,
-        },
-        secondCurrency: {
-          ...secondCurrency,
-          value: secondCurrencyValue,
-        },
-      });
+      firstCurrencyValue = e.target.value;
+      secondCurrencyValue = Math.round(firstCurrencyValue * rate * 100) / 100;
+    } else if (e.target.name === "secondCurrency") {
+      secondCurrencyValue = e.target.value;
+      firstCurrencyValue = Math.round((secondCurrencyValue / rate) * 100) / 100;
     }
+
+    setCurrencyPair({
+      ...currencyPair,
+      baseCurrency: {
+        ...baseCurrency,
+        value: firstCurrencyValue,
+      },
+      secondCurrency: {
+        ...secondCurrency,
+        value: secondCurrencyValue,
+      },
+    });
   };
 
   return (
