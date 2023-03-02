@@ -16,7 +16,7 @@ const BasedCurrencyName = styled.span`
   font-weight: bold;
 `;
 
-export const CurrencyList = () => {
+export const CurrencyList = ({ context }) => {
   const {
     currencyFullList,
     setCurrencyFullList,
@@ -75,8 +75,14 @@ export const CurrencyList = () => {
               />
             </TableCell>
             <TableCell align="left">
-              Base currency:{" "}
-              <BasedCurrencyName>{baseCurrency.currency}</BasedCurrencyName>
+              {/* {context ? "Selected currency: " : "Base currency: "} */} Base
+              currency:
+              <BasedCurrencyName>
+                {/* {context === "secondCurrency"
+                  ? secondCurrency.currency
+                  : baseCurrency.currency} */}{" "}
+                {baseCurrency.currency}
+              </BasedCurrencyName>
             </TableCell>
           </TableRow>
           <TableRow>

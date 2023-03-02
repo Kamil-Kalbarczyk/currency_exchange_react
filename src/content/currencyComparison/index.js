@@ -82,7 +82,10 @@ export const CurrencyComparison = () => {
             id="firstComparisonCurrency"
             endAdornment={
               <InputAdornment position="end">
-                <CurrencyChangeButton buttonName={baseCurrency.currency} />
+                <CurrencyChangeButton
+                  buttonName={baseCurrency.currency}
+                  context="baseCurrency"
+                />
               </InputAdornment>
             }
             name="firstCurrency"
@@ -98,7 +101,10 @@ export const CurrencyComparison = () => {
             id="handleClickSecondComparisonCurrency"
             endAdornment={
               <InputAdornment position="end">
-                <CurrencyChangeButton buttonName={secondCurrency.currency} />
+                <CurrencyChangeButton
+                  buttonName={secondCurrency.currency}
+                  context="secondCurrency"
+                />
               </InputAdornment>
             }
             name="secondCurrency"

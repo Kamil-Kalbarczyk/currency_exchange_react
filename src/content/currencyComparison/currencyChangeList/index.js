@@ -3,7 +3,7 @@ import { useState } from "react";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 
-export const CurrencyChangeButton = ({ buttonName }) => {
+export const CurrencyChangeButton = ({ buttonName, context }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -34,7 +34,7 @@ export const CurrencyChangeButton = ({ buttonName }) => {
           "aria-labelledby": "basic-button",
         }}
       >
-        <CurrencyList />
+        <CurrencyList context={context} />
       </Menu>
     </div>
   );
