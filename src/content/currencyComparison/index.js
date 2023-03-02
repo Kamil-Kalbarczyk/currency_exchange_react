@@ -1,3 +1,4 @@
+import { CurrencyChangeButton } from "./currencyChangeList";
 import { useState, useContext, useEffect } from "react";
 import { CurrencyContext } from "../currencyContext";
 import styled, { keyframes } from "styled-components";
@@ -81,13 +82,7 @@ export const CurrencyComparison = () => {
             id="firstComparisonCurrency"
             endAdornment={
               <InputAdornment position="end">
-                <Button
-                  sx={{ fontWeight: "bold" }}
-                  variant="text"
-                  onClick={handleClickFirstComparisonCurrency}
-                >
-                  {baseCurrency.currency}
-                </Button>
+                <CurrencyChangeButton buttonName={baseCurrency.currency} />
               </InputAdornment>
             }
             name="firstCurrency"
@@ -103,13 +98,7 @@ export const CurrencyComparison = () => {
             id="handleClickSecondComparisonCurrency"
             endAdornment={
               <InputAdornment position="end">
-                <Button
-                  sx={{ fontWeight: "bold" }}
-                  variant="text"
-                  onClick={handleClickSecondComparisonCurrency}
-                >
-                  {secondCurrency.currency}
-                </Button>
+                <CurrencyChangeButton buttonName={secondCurrency.currency} />
               </InputAdornment>
             }
             name="secondCurrency"
