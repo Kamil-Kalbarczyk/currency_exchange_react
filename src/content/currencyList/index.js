@@ -130,6 +130,10 @@ export const CurrencyList = ({ context, closeList }) => {
                 sx={{
                   "&:last-child td, &:last-child th": { border: 0 },
                   cursor: context ? "pointer" : "inherit",
+                  transition: "0.3s",
+                  "&:hover": {
+                    backgroundColor: context ? "#F2F2F2" : "inherit",
+                  },
                 }}
                 onClick={() => handleCurrencyClick(currency)}
               >
