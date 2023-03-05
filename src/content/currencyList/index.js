@@ -16,13 +16,15 @@ const BasedCurrencyName = styled.span`
   font-weight: bold;
 `;
 
-export const CurrencyList = ({ context }) => {
+export const CurrencyList = ({ context, closeList }) => {
   const {
     currencyFullList,
     setCurrencyFullList,
-    currencyPair: { baseCurrency, secondCurrency, rate },
+    currencyPair,
     setCurrencyPair,
   } = useContext(CurrencyContext);
+
+  const { baseCurrency, secondCurrency, rate } = currencyPair;
 
   const [isLoading, setIsLoading] = useState(true);
   const [currencyFilter, setCurrencyFilter] = useState(null);
@@ -61,12 +63,28 @@ export const CurrencyList = ({ context }) => {
     setCurrencyFilter(filterList);
   };
 
-  const handleCurrencyClick = () => {
-    // console.log("klik");
+  const handleCurrencyClick = (currency) => {
     if (context === "baseCurrency") {
-      console.log(context);
+      setCurrencyPair({
+        ...currencyPair,
+        baseCurrency: {
+          ...baseCurrency,
+          currency,
+        },
+      });
+
+      setIsLoading(true);
+      closeList();
     } else if (context === "secondCurrency") {
-      console.log(context);
+      setCurrencyPair({
+        ...currencyPair,
+        secondCurrency: {
+          ...secondCurrency,
+          currency: currency,
+        },
+      });
+
+      closeList();
     }
   };
 
@@ -113,7 +131,7 @@ export const CurrencyList = ({ context }) => {
                   "&:last-child td, &:last-child th": { border: 0 },
                   cursor: context ? "pointer" : "inherit",
                 }}
-                onClick={handleCurrencyClick}
+                onClick={() => handleCurrencyClick(currency)}
               >
                 <TableCell align="left" sx={{ fontWeight: "bold" }}>
                   {currency}

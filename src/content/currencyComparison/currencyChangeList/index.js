@@ -26,7 +26,7 @@ export const CurrencyChangeButton = ({ buttonName, context }) => {
         {buttonName ? buttonName : "brak propsa"}
       </Button>
       <Menu
-        id="basic-menu"
+        // id="basic-menu"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
@@ -34,7 +34,7 @@ export const CurrencyChangeButton = ({ buttonName, context }) => {
           "aria-labelledby": "basic-button",
         }}
       >
-        <CurrencyList context={context} />
+        <CurrencyList context={context} closeList={handleClose} />
       </Menu>
     </div>
   );
