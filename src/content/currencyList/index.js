@@ -35,7 +35,7 @@ export const CurrencyList = ({ context }) => {
         setCurrencyFilter(Object.entries(data.rates));
         setIsLoading(false);
       });
-  }, []);
+  }, [baseCurrency.currency]);
 
   if (isLoading) {
     return <CircularProgress />;
@@ -59,6 +59,15 @@ export const CurrencyList = ({ context }) => {
     });
 
     setCurrencyFilter(filterList);
+  };
+
+  const handleCurrencyClick = () => {
+    // console.log("klik");
+    if (context === "baseCurrency") {
+      console.log(context);
+    } else if (context === "secondCurrency") {
+      console.log(context);
+    }
   };
 
   return (
@@ -100,7 +109,11 @@ export const CurrencyList = ({ context }) => {
             return (
               <TableRow
                 key={currency}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                sx={{
+                  "&:last-child td, &:last-child th": { border: 0 },
+                  cursor: context ? "pointer" : "inherit",
+                }}
+                onClick={handleCurrencyClick}
               >
                 <TableCell align="left" sx={{ fontWeight: "bold" }}>
                   {currency}
