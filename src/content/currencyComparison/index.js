@@ -6,7 +6,8 @@ import Box from "@mui/material/Box";
 import Input from "@mui/material/Input";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
-import Button from "@mui/material/Button";
+import Fab from "@mui/material/Fab";
+import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 
 export const CurrencyComparison = () => {
   const { currencyPair, setCurrencyPair, currencyFullList } =
@@ -66,53 +67,76 @@ export const CurrencyComparison = () => {
     });
   };
 
+  const handleCurrencyReplace = () => {
+    setCurrencyPair({
+      ...currencyPair,
+      baseCurrency: secondCurrency,
+      secondCurrency: baseCurrency,
+    });
+  };
+
   return (
     <Box
       sx={{
         display: "flex",
-        flexWrap: "wrap",
-        flexDirection: "column",
-        transition: "0.3s",
+        // flexWrap: "wrap",
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: "15px",
+        // transition: "0.3s",
       }}
     >
-      <div>
-        <FormControl sx={{ m: 1, width: "25ch" }} variant="standard">
-          {/* <InputLabel htmlFor="firstComparisonCurrency">{firstCurrency.name}</InputLabel> */}
-          <Input
-            id="firstComparisonCurrency"
-            endAdornment={
-              <InputAdornment position="end">
-                <CurrencyChangeButton
-                  buttonName={baseCurrency.currency}
-                  context="baseCurrency"
-                />
-              </InputAdornment>
-            }
-            name="firstCurrency"
-            value={baseCurrency.value}
-            onChange={handleChangeValue}
-          />
-        </FormControl>
-      </div>
-      <div>
-        <FormControl sx={{ m: 1, width: "25ch" }} variant="standard">
-          {/* <InputLabel htmlFor="handleClickSecondComparisonCurrency">{secondCurrency.name}</InputLabel> */}
-          <Input
-            id="handleClickSecondComparisonCurrency"
-            endAdornment={
-              <InputAdornment position="end">
-                <CurrencyChangeButton
-                  buttonName={secondCurrency.currency}
-                  context="secondCurrency"
-                />
-              </InputAdornment>
-            }
-            name="secondCurrency"
-            value={secondCurrency.value}
-            onChange={handleChangeValue}
-          />
-        </FormControl>
-      </div>
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          flexDirection: "column",
+          transition: "0.3s",
+        }}
+      >
+        <div>
+          <FormControl sx={{ m: 1, width: "25ch" }} variant="standard">
+            {/* <InputLabel htmlFor="firstComparisonCurrency">{firstCurrency.name}</InputLabel> */}
+            <Input
+              id="firstComparisonCurrency"
+              endAdornment={
+                <InputAdornment position="end">
+                  <CurrencyChangeButton
+                    buttonName={baseCurrency.currency}
+                    context="baseCurrency"
+                  />
+                </InputAdornment>
+              }
+              name="firstCurrency"
+              value={baseCurrency.value}
+              onChange={handleChangeValue}
+            />
+          </FormControl>
+        </div>
+        <div>
+          <FormControl sx={{ m: 1, width: "25ch" }} variant="standard">
+            {/* <InputLabel htmlFor="handleClickSecondComparisonCurrency">{secondCurrency.name}</InputLabel> */}
+            <Input
+              id="handleClickSecondComparisonCurrency"
+              endAdornment={
+                <InputAdornment position="end">
+                  <CurrencyChangeButton
+                    buttonName={secondCurrency.currency}
+                    context="secondCurrency"
+                  />
+                </InputAdornment>
+              }
+              name="secondCurrency"
+              value={secondCurrency.value}
+              onChange={handleChangeValue}
+            />
+          </FormControl>
+        </div>
+      </Box>
+      <Fab color="primary" onClick={handleCurrencyReplace}>
+        <CurrencyExchangeIcon />
+      </Fab>
     </Box>
   );
 };
