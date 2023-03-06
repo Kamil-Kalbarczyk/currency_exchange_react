@@ -122,7 +122,7 @@ export const CurrencyList = ({ context, closeList }) => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell align="right">
+            <TableCell align="right" colSpan={2}>
               <TextField
                 id="findCurrency"
                 label="Find currency"
@@ -131,18 +131,12 @@ export const CurrencyList = ({ context, closeList }) => {
               />
             </TableCell>
             <TableCell align="left">
-              {/* {context ? "Selected currency: " : "Base currency: "} */} Base
-              currency:
-              <BasedCurrencyName>
-                {/* {context === "secondCurrency"
-                  ? secondCurrency.currency
-                  : baseCurrency.currency} */}{" "}
-                {baseCurrency.currency}
-              </BasedCurrencyName>
+              Base currency:
+              <BasedCurrencyName> {baseCurrency.currency}</BasedCurrencyName>
             </TableCell>
           </TableRow>
           <TableRow>
-            <TableCell align="left" sx={{ fontWeight: "bold" }}>
+            <TableCell align="left" sx={{ fontWeight: "bold" }} colSpan={2}>
               Currency
             </TableCell>
             <TableCell align="right" sx={{ fontWeight: "bold" }}>
@@ -167,8 +161,9 @@ export const CurrencyList = ({ context, closeList }) => {
                 onClick={() => handleCurrencyClick(currency)}
               >
                 <TableCell align="left" sx={{ fontWeight: "bold" }}>
-                  {currency} {fullName}
+                  {currency}
                 </TableCell>
+                <TableCell align="left">{fullName}</TableCell>
                 <TableCell align="right">{rate}</TableCell>
               </TableRow>
             );
