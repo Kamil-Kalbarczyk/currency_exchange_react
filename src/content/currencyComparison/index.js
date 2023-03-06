@@ -7,7 +7,7 @@ import Input from "@mui/material/Input";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 import Fab from "@mui/material/Fab";
-// import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
+import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 
 export const CurrencyComparison = () => {
   const { currencyPair, setCurrencyPair, currencyFullList } =
@@ -31,7 +31,6 @@ export const CurrencyComparison = () => {
         },
         rate: rateOfSecondCurrency,
       });
-      // console.log(currencyPair);
     }
   }, [currencyFullList, baseCurrency.currency, secondCurrency.currency]);
 
@@ -135,7 +134,7 @@ export const CurrencyComparison = () => {
         </div>
       </Box>
       <Fab color="primary" onClick={handleCurrencyReplace}>
-        {/* <CurrencyExchangeIcon /> */}
+        <CurrencyExchangeIcon />
       </Fab>
     </Box>
   );
