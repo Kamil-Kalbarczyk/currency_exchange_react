@@ -48,21 +48,16 @@ export const CurrencyList = ({ context, closeList }) => {
       .then((response) => response.json())
       .then((data) => {
         const formattedData = Object.entries(data.rates);
-        // console.log(formattedData);
         if (currencyFullNames) {
           currencyFullNames.forEach(({ currency, fullName }) => {
             formattedData.forEach(([currencyCode, rate], index) => {
               if (currency === currencyCode) {
-                // console.log("para: ", currency, currencyCode);
                 formattedData[index].push(fullName);
               }
             });
           });
         }
-        // console.log(formattedData);
-        // setCurrencyFullList(Object.entries(data.rates));
         setCurrencyFullList(formattedData);
-        // setCurrencyFilter(Object.entries(data.rates));
         setCurrencyFilter(formattedData);
         setIsLoading(false);
       });
@@ -85,8 +80,12 @@ export const CurrencyList = ({ context, closeList }) => {
     const filterValue = e.target.value.toUpperCase();
 
     const filterList = currencyFullList.filter((item) => {
-      const [currency, rate] = item;
-      return currency.includes(filterValue);
+      const [currency, rate, fullName] = item;
+      if (currency.includes(filterValue)) {
+        return currency.includes(filterValue);
+      } else if (fullName.toUpperCase().includes(filterValue)) {
+        return fullName.toUpperCase().includes(filterValue);
+      }
     });
 
     setCurrencyFilter(filterList);
@@ -128,6 +127,7 @@ export const CurrencyList = ({ context, closeList }) => {
                 label="Find currency"
                 variant="outlined"
                 onChange={handleCurrencyFilter}
+                sx={{ width: "100%" }}
               />
             </TableCell>
             <TableCell align="left">
