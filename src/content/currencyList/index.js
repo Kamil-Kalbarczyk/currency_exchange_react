@@ -29,15 +29,44 @@ export const CurrencyList = ({ context, closeList }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [currencyFilter, setCurrencyFilter] = useState(null);
 
+  const [currencyFullNames, setCurrencyFullNames] = useState(null);
+
+  useEffect(() => {
+    fetch("https://openexchangerates.org/api/currencies.json")
+      .then((response) => response.json())
+      .then((data) => {
+        const formattedData = Object.entries(data).map(([code, name]) => ({
+          currency: code,
+          fullName: name,
+        }));
+        setCurrencyFullNames(formattedData);
+      });
+  }, []);
+
   useEffect(() => {
     fetch(`https://api.exchangerate.host/latest?base=${baseCurrency.currency}`)
       .then((response) => response.json())
       .then((data) => {
-        setCurrencyFullList(Object.entries(data.rates));
-        setCurrencyFilter(Object.entries(data.rates));
+        const formattedData = Object.entries(data.rates);
+        // console.log(formattedData);
+        if (currencyFullNames) {
+          currencyFullNames.forEach(({ currency, fullName }) => {
+            formattedData.forEach(([currencyCode, rate], index) => {
+              if (currency === currencyCode) {
+                // console.log("para: ", currency, currencyCode);
+                formattedData[index].push(fullName);
+              }
+            });
+          });
+        }
+        // console.log(formattedData);
+        // setCurrencyFullList(Object.entries(data.rates));
+        setCurrencyFullList(formattedData);
+        // setCurrencyFilter(Object.entries(data.rates));
+        setCurrencyFilter(formattedData);
         setIsLoading(false);
       });
-  }, [baseCurrency.currency]);
+  }, [baseCurrency.currency, currencyFullNames]);
 
   if (isLoading) {
     return <CircularProgress />;
@@ -123,7 +152,7 @@ export const CurrencyList = ({ context, closeList }) => {
         </TableHead>
         <TableBody>
           {currencyFilter.map((item) => {
-            const [currency, rate] = item;
+            const [currency, rate, fullName] = item;
             return (
               <TableRow
                 key={currency}
@@ -138,7 +167,7 @@ export const CurrencyList = ({ context, closeList }) => {
                 onClick={() => handleCurrencyClick(currency)}
               >
                 <TableCell align="left" sx={{ fontWeight: "bold" }}>
-                  {currency}
+                  {currency} {fullName}
                 </TableCell>
                 <TableCell align="right">{rate}</TableCell>
               </TableRow>
