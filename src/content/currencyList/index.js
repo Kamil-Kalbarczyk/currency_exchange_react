@@ -15,6 +15,7 @@ import { InputAdornment } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import Fab from "@mui/material/Fab";
 import CloseIcon from "@mui/icons-material/Close";
+import { Box } from "@mui/material";
 
 const headerTableCurrencyChange = styled.div`
   display: flex;
@@ -137,75 +138,82 @@ export const CurrencyList = ({ context, closeList }) => {
 
   if (context) {
     return (
-      <TableContainer sx={{ minWidth: 300, maxWidth: 320 }} component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell align="right" colSpan={3}>
-                <Fab
-                  color="inherit"
-                  size="small"
-                  sx={{ mb: "10px" }}
-                  onClick={() => {
-                    closeList();
-                  }}
-                >
-                  <CloseIcon />
-                </Fab>
-                <TextField
-                  id="findCurrency"
-                  label="Find currency"
-                  variant="outlined"
-                  onChange={handleCurrencyFilter}
-                  sx={{ width: "100%" }}
-                  value={findCurrency}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <SearchIcon />
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell align="left" sx={{ fontWeight: "bold" }} colSpan={3}>
-                Currency
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {currencyFilter.map((item) => {
-              const [currency, rate, fullName] = item;
-              return (
-                <TableRow
-                  key={currency}
-                  sx={{
-                    "&:last-child td, &:last-child th": { border: 0 },
-                    cursor: context ? "pointer" : "inherit",
-                    transition: "0.3s",
-                    "&:hover": {
-                      backgroundColor: context ? "#F2F2F2" : "inherit",
-                    },
-                  }}
-                  onClick={() => handleCurrencyClick(currency)}
-                >
-                  <TableCell align="left">
-                    <div
-                      className={`currency-flag currency-flag-${currency.toLowerCase()}`}
-                    ></div>
-                  </TableCell>
-                  <TableCell align="left" sx={{ fontWeight: "bold" }}>
-                    {currency}
-                  </TableCell>
-                  <TableCell align="left">{fullName}</TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <Box component={Paper}>
+        <Box
+          sx={{
+            display: "flex",
+            gap: "10px",
+            justifyContent: "space-between",
+            padding: "5px 10px",
+          }}
+        >
+          <TextField
+            id="findCurrency"
+            label="Find currency"
+            variant="outlined"
+            onChange={handleCurrencyFilter}
+            sx={{ width: "80%" }}
+            value={findCurrency}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            }}
+          />
+          <Fab
+            color="inherit"
+            size="small"
+            sx={{ mb: "10px" }}
+            onClick={() => {
+              closeList();
+            }}
+          >
+            <CloseIcon />
+          </Fab>
+        </Box>
+        <TableContainer sx={{ width: 300, height: "80vh" }}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell align="left" sx={{ fontWeight: "bold" }} colSpan={3}>
+                  Currency
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {currencyFilter.map((item) => {
+                const [currency, rate, fullName] = item;
+                return (
+                  <TableRow
+                    key={currency}
+                    sx={{
+                      "&:last-child td, &:last-child th": { border: 0 },
+                      cursor: context ? "pointer" : "inherit",
+                      transition: "0.3s",
+                      "&:hover": {
+                        backgroundColor: context ? "#F2F2F2" : "inherit",
+                      },
+                    }}
+                    onClick={() => handleCurrencyClick(currency)}
+                  >
+                    <TableCell align="left">
+                      <div
+                        className={`currency-flag currency-flag-${currency.toLowerCase()}`}
+                      ></div>
+                    </TableCell>
+                    <TableCell align="left" sx={{ fontWeight: "bold" }}>
+                      {currency}
+                    </TableCell>
+                    <TableCell align="left">{fullName}</TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Box>
     );
   } else {
     return (
