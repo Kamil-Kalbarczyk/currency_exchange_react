@@ -11,6 +11,8 @@ import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
 import { CircularProgress } from "@mui/material";
 import TextField from "@mui/material/TextField";
+import { InputAdornment } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 
 const BasedCurrencyContainer = styled.div`
   display: flex;
@@ -140,6 +142,13 @@ export const CurrencyList = ({ context, closeList }) => {
                   onChange={handleCurrencyFilter}
                   sx={{ width: "100%" }}
                   value={findCurrency}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <SearchIcon />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
               </TableCell>
             </TableRow>
@@ -195,6 +204,13 @@ export const CurrencyList = ({ context, closeList }) => {
                   onChange={handleCurrencyFilter}
                   sx={{ width: "100%" }}
                   value={findCurrency}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <SearchIcon />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
               </TableCell>
               <TableCell align="left">
