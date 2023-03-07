@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from "react";
 import { CurrencyContext } from "../currencyContext";
-import "../../../node_modules/currency-flags/dist/currency-flags.min.css";
 import styled from "styled-components";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -13,7 +12,14 @@ import { Typography } from "@mui/material";
 import { CircularProgress } from "@mui/material";
 import TextField from "@mui/material/TextField";
 
-const BasedCurrencyName = styled.span`
+const BasedCurrencyContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-row;
+  gap: 10px;
+`;
+const BasedCurrencyName = styled.div`
   font-weight: bold;
 `;
 
@@ -132,8 +138,15 @@ export const CurrencyList = ({ context, closeList }) => {
               />
             </TableCell>
             <TableCell align="left">
-              Base currency:
-              <BasedCurrencyName> {baseCurrency.currency}</BasedCurrencyName>
+              <div>
+                <div>Base currency:</div>
+              </div>
+              <BasedCurrencyContainer>
+                <div
+                  className={`currency-flag currency-flag-${baseCurrency.currency.toLowerCase()}`}
+                ></div>
+                <BasedCurrencyName>{baseCurrency.currency}</BasedCurrencyName>
+              </BasedCurrencyContainer>
             </TableCell>
           </TableRow>
           <TableRow>

@@ -2,6 +2,7 @@ import { CurrencyList } from "../../currencyList";
 import { useState } from "react";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 export const CurrencyChangeButton = ({ buttonName, context }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -24,6 +25,7 @@ export const CurrencyChangeButton = ({ buttonName, context }) => {
         sx={{ fontWeight: "bold" }}
       >
         {buttonName ? buttonName : "brak propsa"}
+        <KeyboardArrowDownIcon />
       </Button>
       <Menu
         // id="basic-menu"

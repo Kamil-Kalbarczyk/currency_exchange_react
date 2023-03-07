@@ -96,11 +96,13 @@ export const CurrencyComparison = () => {
       >
         <div>
           <FormControl sx={{ m: 1, width: "25ch" }} variant="standard">
-            {/* <InputLabel htmlFor="firstComparisonCurrency">{firstCurrency.name}</InputLabel> */}
             <Input
               id="firstComparisonCurrency"
               endAdornment={
                 <InputAdornment position="end">
+                  <div
+                    className={`currency-flag currency-flag-${baseCurrency.currency.toLowerCase()}`}
+                  ></div>
                   <CurrencyChangeButton
                     buttonName={baseCurrency.currency}
                     context="baseCurrency"
@@ -115,11 +117,13 @@ export const CurrencyComparison = () => {
         </div>
         <div>
           <FormControl sx={{ m: 1, width: "25ch" }} variant="standard">
-            {/* <InputLabel htmlFor="handleClickSecondComparisonCurrency">{secondCurrency.name}</InputLabel> */}
             <Input
               id="handleClickSecondComparisonCurrency"
               endAdornment={
                 <InputAdornment position="end">
+                  <div
+                    className={`currency-flag currency-flag-${secondCurrency.currency.toLowerCase()}`}
+                  ></div>
                   <CurrencyChangeButton
                     buttonName={secondCurrency.currency}
                     context="secondCurrency"
