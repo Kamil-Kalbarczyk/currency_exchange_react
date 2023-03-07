@@ -37,6 +37,7 @@ export const CurrencyList = ({ context, closeList }) => {
   const [currencyFilter, setCurrencyFilter] = useState(null);
 
   const [currencyFullNames, setCurrencyFullNames] = useState(null);
+  const [findCurrency, setFindCurrency] = useState("");
 
   useEffect(() => {
     fetch("https://openexchangerates.org/api/currencies.json")
@@ -67,6 +68,7 @@ export const CurrencyList = ({ context, closeList }) => {
         setCurrencyFullList(formattedData);
         setCurrencyFilter(formattedData);
         setIsLoading(false);
+        setFindCurrency("");
       });
   }, [baseCurrency.currency, currencyFullNames]);
 
@@ -85,13 +87,14 @@ export const CurrencyList = ({ context, closeList }) => {
   const handleCurrencyFilter = (e) => {
     setCurrencyFilter(currencyFullList);
     const filterValue = e.target.value.toUpperCase();
+    setFindCurrency(filterValue);
 
     const filterList = currencyFullList.filter((item) => {
       const [currency, rate, fullName] = item;
-      if (currency.includes(filterValue)) {
-        return currency.includes(filterValue);
-      } else if (fullName.toUpperCase().includes(filterValue)) {
-        return fullName.toUpperCase().includes(filterValue);
+      if (currency.includes(findCurrency)) {
+        return currency.includes(findCurrency);
+      } else if (fullName.toUpperCase().includes(findCurrency)) {
+        return fullName.toUpperCase().includes(findCurrency);
       }
     });
 
@@ -136,6 +139,7 @@ export const CurrencyList = ({ context, closeList }) => {
                   variant="outlined"
                   onChange={handleCurrencyFilter}
                   sx={{ width: "100%" }}
+                  value={findCurrency}
                 />
               </TableCell>
             </TableRow>
@@ -190,6 +194,7 @@ export const CurrencyList = ({ context, closeList }) => {
                   variant="outlined"
                   onChange={handleCurrencyFilter}
                   sx={{ width: "100%" }}
+                  value={findCurrency}
                 />
               </TableCell>
               <TableCell align="left">
