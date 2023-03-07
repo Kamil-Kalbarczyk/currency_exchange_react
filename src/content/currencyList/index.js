@@ -13,6 +13,13 @@ import { CircularProgress } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { InputAdornment } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import Fab from "@mui/material/Fab";
+import CloseIcon from "@mui/icons-material/Close";
+
+const headerTableCurrencyChange = styled.div`
+  display: flex;
+  gap: 15px;
+`;
 
 const BasedCurrencyContainer = styled.div`
   display: flex;
@@ -135,6 +142,16 @@ export const CurrencyList = ({ context, closeList }) => {
           <TableHead>
             <TableRow>
               <TableCell align="right" colSpan={3}>
+                <Fab
+                  color="inherit"
+                  size="small"
+                  sx={{ mb: "10px" }}
+                  onClick={() => {
+                    closeList();
+                  }}
+                >
+                  <CloseIcon />
+                </Fab>
                 <TextField
                   id="findCurrency"
                   label="Find currency"
