@@ -95,15 +95,15 @@ export const CurrencyList = ({ context, closeList }) => {
 
   const handleCurrencyFilter = (e) => {
     setCurrencyFilter(currencyFullList);
-    const filterValue = e.target.value.toUpperCase();
+    const filterValue = e.target.value;
     setFindCurrency(filterValue);
 
     const filterList = currencyFullList.filter((item) => {
       const [currency, rate, fullName] = item;
-      if (currency.includes(findCurrency)) {
-        return currency.includes(findCurrency);
-      } else if (fullName.toUpperCase().includes(findCurrency)) {
-        return fullName.toUpperCase().includes(findCurrency);
+      if (currency.includes(findCurrency.toUpperCase())) {
+        return currency.includes(findCurrency.toUpperCase());
+      } else if (fullName.toUpperCase().includes(findCurrency.toUpperCase())) {
+        return fullName.toUpperCase().includes(findCurrency.toUpperCase());
       }
     });
 
