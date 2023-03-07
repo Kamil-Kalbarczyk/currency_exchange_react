@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { CurrencyContext } from "../currencyContext";
+import "../../../node_modules/currency-flags/dist/currency-flags.min.css";
 import styled from "styled-components";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -121,7 +122,7 @@ export const CurrencyList = ({ context, closeList }) => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell align="right" colSpan={2}>
+            <TableCell align="right" colSpan={3}>
               <TextField
                 id="findCurrency"
                 label="Find currency"
@@ -136,7 +137,7 @@ export const CurrencyList = ({ context, closeList }) => {
             </TableCell>
           </TableRow>
           <TableRow>
-            <TableCell align="left" sx={{ fontWeight: "bold" }} colSpan={2}>
+            <TableCell align="left" sx={{ fontWeight: "bold" }} colSpan={3}>
               Currency
             </TableCell>
             <TableCell align="right" sx={{ fontWeight: "bold" }}>
@@ -160,6 +161,11 @@ export const CurrencyList = ({ context, closeList }) => {
                 }}
                 onClick={() => handleCurrencyClick(currency)}
               >
+                <TableCell align="left">
+                  <div
+                    className={`currency-flag currency-flag-${currency.toLowerCase()}`}
+                  ></div>
+                </TableCell>
                 <TableCell align="left" sx={{ fontWeight: "bold" }}>
                   {currency}
                 </TableCell>
