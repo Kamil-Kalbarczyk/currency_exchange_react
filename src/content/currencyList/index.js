@@ -123,72 +123,123 @@ export const CurrencyList = ({ context, closeList }) => {
     }
   };
 
-  return (
-    <TableContainer sx={{ minWidth: 300, maxWidth: 420 }} component={Paper}>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell align="right" colSpan={3}>
-              <TextField
-                id="findCurrency"
-                label="Find currency"
-                variant="outlined"
-                onChange={handleCurrencyFilter}
-                sx={{ width: "100%" }}
-              />
-            </TableCell>
-            <TableCell align="left">
-              <div>
-                <div>Base currency:</div>
-              </div>
-              <BasedCurrencyContainer>
-                <div
-                  className={`currency-flag currency-flag-${baseCurrency.currency.toLowerCase()}`}
-                ></div>
-                <BasedCurrencyName>{baseCurrency.currency}</BasedCurrencyName>
-              </BasedCurrencyContainer>
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell align="left" sx={{ fontWeight: "bold" }} colSpan={3}>
-              Currency
-            </TableCell>
-            <TableCell align="right" sx={{ fontWeight: "bold" }}>
-              Rate
-            </TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {currencyFilter.map((item) => {
-            const [currency, rate, fullName] = item;
-            return (
-              <TableRow
-                key={currency}
-                sx={{
-                  "&:last-child td, &:last-child th": { border: 0 },
-                  cursor: context ? "pointer" : "inherit",
-                  transition: "0.3s",
-                  "&:hover": {
-                    backgroundColor: context ? "#F2F2F2" : "inherit",
-                  },
-                }}
-                onClick={() => handleCurrencyClick(currency)}
-              >
-                <TableCell align="left">
+  if (context) {
+    return (
+      <TableContainer sx={{ minWidth: 300, maxWidth: 320 }} component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell align="right" colSpan={3}>
+                <TextField
+                  id="findCurrency"
+                  label="Find currency"
+                  variant="outlined"
+                  onChange={handleCurrencyFilter}
+                  sx={{ width: "100%" }}
+                />
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell align="left" sx={{ fontWeight: "bold" }} colSpan={3}>
+                Currency
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {currencyFilter.map((item) => {
+              const [currency, rate, fullName] = item;
+              return (
+                <TableRow
+                  key={currency}
+                  sx={{
+                    "&:last-child td, &:last-child th": { border: 0 },
+                    cursor: context ? "pointer" : "inherit",
+                    transition: "0.3s",
+                    "&:hover": {
+                      backgroundColor: context ? "#F2F2F2" : "inherit",
+                    },
+                  }}
+                  onClick={() => handleCurrencyClick(currency)}
+                >
+                  <TableCell align="left">
+                    <div
+                      className={`currency-flag currency-flag-${currency.toLowerCase()}`}
+                    ></div>
+                  </TableCell>
+                  <TableCell align="left" sx={{ fontWeight: "bold" }}>
+                    {currency}
+                  </TableCell>
+                  <TableCell align="left">{fullName}</TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    );
+  } else {
+    return (
+      <TableContainer sx={{ minWidth: 300, maxWidth: 420 }} component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell align="right" colSpan={3}>
+                <TextField
+                  id="findCurrency"
+                  label="Find currency"
+                  variant="outlined"
+                  onChange={handleCurrencyFilter}
+                  sx={{ width: "100%" }}
+                />
+              </TableCell>
+              <TableCell align="left">
+                <div>
+                  <div>Base currency:</div>
+                </div>
+                <BasedCurrencyContainer>
                   <div
-                    className={`currency-flag currency-flag-${currency.toLowerCase()}`}
+                    className={`currency-flag currency-flag-${baseCurrency.currency.toLowerCase()}`}
                   ></div>
-                </TableCell>
-                <TableCell align="left" sx={{ fontWeight: "bold" }}>
-                  {currency}
-                </TableCell>
-                <TableCell align="left">{fullName}</TableCell>
-                <TableCell align="right">{rate}</TableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
+                  <BasedCurrencyName>{baseCurrency.currency}</BasedCurrencyName>
+                </BasedCurrencyContainer>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell align="left" sx={{ fontWeight: "bold" }} colSpan={3}>
+                Currency
+              </TableCell>
+              <TableCell align="right" sx={{ fontWeight: "bold" }}>
+                Rate
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {currencyFilter.map((item) => {
+              const [currency, rate, fullName] = item;
+              return (
+                <TableRow
+                  key={currency}
+                  sx={{
+                    "&:last-child td, &:last-child th": { border: 0 },
+                  }}
+                  onClick={() => handleCurrencyClick(currency)}
+                >
+                  <TableCell align="left">
+                    <div
+                      className={`currency-flag currency-flag-${currency.toLowerCase()}`}
+                    ></div>
+                  </TableCell>
+                  <TableCell align="left" sx={{ fontWeight: "bold" }}>
+                    {currency}
+                  </TableCell>
+                  <TableCell align="left">{fullName}</TableCell>
+                  <TableCell align="right">{rate}</TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    );
+  }
 };
