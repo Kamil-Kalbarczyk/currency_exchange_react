@@ -173,7 +173,7 @@ export const CurrencyList = ({ context, closeList }) => {
             <CloseIcon />
           </Fab>
         </Box>
-        <TableContainer sx={{ width: 300, height: "80vh" }}>
+        <TableContainer sx={{ width: 300, height: "80vh", m: "0 auto" }}>
           <Table>
             <TableHead>
               <TableRow>
