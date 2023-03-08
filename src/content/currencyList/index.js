@@ -175,13 +175,13 @@ export const CurrencyList = ({ context, closeList }) => {
         </Box>
         <TableContainer sx={{ width: 300, height: "80vh", m: "0 auto" }}>
           <Table>
-            <TableHead>
+            {/* <TableHead>
               <TableRow>
                 <TableCell align="left" sx={{ fontWeight: "bold" }} colSpan={3}>
                   Currency
                 </TableCell>
               </TableRow>
-            </TableHead>
+            </TableHead> */}
             <TableBody>
               {currencyFilter.map((item) => {
                 const [currency, rate, fullName] = item;
