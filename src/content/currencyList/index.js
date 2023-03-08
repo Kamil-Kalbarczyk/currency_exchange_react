@@ -250,10 +250,14 @@ export const CurrencyList = ({ context, closeList }) => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell align="left" sx={{ fontWeight: "bold" }} colSpan={3}>
+                <TableCell
+                  align="center"
+                  sx={{ fontWeight: "bold" }}
+                  colSpan={3}
+                >
                   Currency
                 </TableCell>
-                <TableCell align="right" sx={{ fontWeight: "bold" }}>
+                <TableCell align="center" sx={{ fontWeight: "bold" }}>
                   Rate
                 </TableCell>
               </TableRow>
