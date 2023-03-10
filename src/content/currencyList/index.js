@@ -172,7 +172,7 @@ export const CurrencyList = ({ context, closeList }) => {
             <CloseIcon />
           </Fab>
         </Box>
-        <TableContainer sx={{ width: 300, height: "80vh", m: "0 auto" }}>
+        <TableContainer sx={{ width: 300, maxHeight: "80vh", m: "0 auto" }}>
           <Table>
             <TableBody>
               {currencyFilter.map((item) => {
@@ -245,7 +245,9 @@ export const CurrencyList = ({ context, closeList }) => {
             </BasedCurrencyContainer>
           </div>
         </Box>
-        <TableContainer sx={{ minWidth: 340, maxWidth: 420, height: "80vh" }}>
+        <TableContainer
+          sx={{ minWidth: 340, maxWidth: 420, maxHeight: "80vh" }}
+        >
           <Table>
             <TableHead>
               <TableRow>
