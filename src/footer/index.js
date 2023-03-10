@@ -11,6 +11,8 @@ const AuthorBox = styled.div`
 `;
 
 export const Footer = () => {
+  const year = new Date().getFullYear();
+
   return (
     <Box sx={{ width: "100%", mt: "20px" }}>
       <Divider />
@@ -20,7 +22,7 @@ export const Footer = () => {
         </Typography>
         <FavoriteBorderIcon color="error" sx={{ m: "0 2px" }} />
         <Typography variant="subtitle2" align="center" mt={"10px"}>
-          by Kamil Kalbarczyk
+          by Kamil Kalbarczyk {year} &#169;
         </Typography>
       </AuthorBox>
     </Box>
