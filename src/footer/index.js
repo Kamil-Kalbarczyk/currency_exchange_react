@@ -15,7 +15,7 @@ export const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <Box sx={{ width: "100%", mt: "20px" }}>
+    <Box sx={{ width: "100%", m: "20px auto 10px" }}>
       <Divider />
       <AuthorBox>
         <Typography variant="subtitle2" align="center" mt={"10px"}>
