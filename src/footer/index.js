@@ -1,3 +1,4 @@
+import Link from "@mui/material/Link";
 import { Box } from "@mui/material";
 import { Typography } from "@mui/material";
 import Divider from "@mui/material/Divider";
@@ -22,7 +23,11 @@ export const Footer = () => {
         </Typography>
         <FavoriteBorderIcon color="error" sx={{ m: "0 2px" }} />
         <Typography variant="subtitle2" align="center" mt={"10px"}>
-          by Kamil Kalbarczyk {year} &#169;
+          by{" "}
+          <Link href="https://github.com/Kamil-Kalbarczyk" target="_blank">
+            Kamil Kalbarczyk
+          </Link>{" "}
+          {year} &#169;
         </Typography>
       </AuthorBox>
     </Box>
