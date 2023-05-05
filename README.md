@@ -2,7 +2,7 @@
 
 :pushpin: Choose base currency\
 :pushpin: Choose second currency\
-:pushpin: See the rate\
+:pushpin: See the rate
 
 # Deployment :rocket:
 
@@ -14,7 +14,7 @@
 :boom: CSS\
 :boom: React\
 :boom: Material UI\
-:boom: Styled Components\
+:boom: Styled Components
 
 # Author :boy:
 
